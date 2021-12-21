@@ -1,0 +1,9 @@
+export ENV=dev
+export SERVICE_HOST=0.0.0.0
+export SERVICE_PORT=8084
+export POSTGRES_DB=postgres
+export POSTGRES_USER=testUser
+export POSTGRES_PASSWORD=testPassword
+export POSTGRES_HOST=localhost
+export POSTGRES_PORT=6543
+export POSTGRES_SSL_MODE=disable

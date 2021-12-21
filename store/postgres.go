@@ -1,6 +1,7 @@
 package store
 
 import (
+	"cost-calculator/config"
 	"cost-calculator/models"
 	"database/sql"
 	_ "github.com/lib/pq"
@@ -11,8 +12,8 @@ type Postgres struct {
 	db *sql.DB
 }
 
-func NewDB(cfg *Config) (*Postgres, error) {
-	db, err := sql.Open("postgres", cfg.connStr())
+func NewDB(cfg *config.Configuration) (*Postgres, error) {
+	db, err := sql.Open("postgres", newConfig(cfg).connStr())
 	if err != nil {
 		return nil, err
 	}

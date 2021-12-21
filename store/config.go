@@ -1,8 +1,11 @@
 package store
 
-import "fmt"
+import (
+	"cost-calculator/config"
+	"fmt"
+)
 
-type Config struct {
+type postgresConfig struct {
 	dbname   string
 	user     string
 	password string
@@ -11,22 +14,18 @@ type Config struct {
 	sslMode  string
 }
 
-func (c *Config) connStr() string {
+func (c *postgresConfig) connStr() string {
 	return fmt.Sprintf("dbname=%s user=%s password=%s host=%s port=%d sslmode=%s",
 		c.dbname, c.user, c.password, c.host, c.port, c.sslMode)
 }
 
-func NewConfig(dbname string, user string, password string, host string, port int, sslMode bool) *Config {
-	ssl := "disable"
-	if sslMode {
-		ssl = "enable"
-	}
-	return &Config{
-		dbname:   dbname,
-		user:     user,
-		password: password,
-		host:     host,
-		port:     port,
-		sslMode:  ssl,
+func newConfig(cfg *config.Configuration) *postgresConfig {
+	return &postgresConfig{
+		dbname:   cfg.PostgresDB,
+		user:     cfg.PostgresUser,
+		password: cfg.PostgresPassword,
+		host:     cfg.PostgresHost,
+		port:     cfg.PostgresPort,
+		sslMode:  cfg.PostgresSSLMode,
 	}
 }
