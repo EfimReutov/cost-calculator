@@ -23,6 +23,10 @@ type Configuration struct {
 	PostgresHost     string
 	PostgresPort     int
 	PostgresSSLMode  string
+	SMTPServer       string
+	SMTPPort         int
+	MailUser         string
+	MailPassword     string
 }
 
 func LoadCfg() (*Configuration, error) {
@@ -70,6 +74,26 @@ func LoadCfg() (*Configuration, error) {
 	if postgresSSLMode == "" {
 		return nil, errors.New("POSTGRES_SSL_MODE is empty")
 	}
+	smtpServer := os.Getenv("SMTP_SERVER")
+	if smtpServer == "" {
+		return nil, errors.New("SMTP_SERVER is empty")
+	}
+	smtpPort := os.Getenv("SMTP_PORT")
+	smtpPortInt, err := strconv.Atoi(smtpPort)
+	if err != nil {
+		return nil, err
+	}
+	if smtpPort == "" {
+		return nil, errors.New("SMTP_PORT is empty")
+	}
+	mailUser := os.Getenv("MAIL_USER")
+	if mailUser == "" {
+		return nil, errors.New("MAIL_USER is empty")
+	}
+	mailPassword := os.Getenv("MAIL_PASSWORD")
+	if mailPassword == "" {
+		return nil, errors.New("MAIL_PASSWORD is empty")
+	}
 	return &Configuration{
 		Env:              Env(env),
 		ServiceHost:      serviceHost,
@@ -80,5 +104,9 @@ func LoadCfg() (*Configuration, error) {
 		PostgresHost:     postgresHost,
 		PostgresPort:     postgresPortInt,
 		PostgresSSLMode:  postgresSSLMode,
+		SMTPServer:       smtpServer,
+		SMTPPort:         smtpPortInt,
+		MailUser:         mailUser,
+		MailPassword:     mailPassword,
 	}, nil
 }

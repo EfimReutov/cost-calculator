@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func (h *Handler) InsertIncoming(w http.ResponseWriter, r *http.Request) {
@@ -20,6 +21,8 @@ func (h *Handler) InsertIncoming(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	incoming.Date = time.Now().Local()
+
 	err = h.store.InsertIncoming(incoming)
 	if err != nil {
 		api.JsonResponse(w, http.StatusInternalServerError, err.Error())
@@ -27,6 +30,7 @@ func (h *Handler) InsertIncoming(w http.ResponseWriter, r *http.Request) {
 	}
 
 	api.JsonResponse(w, http.StatusOK, fmt.Sprintf("successful inserted, id: %d", incoming.ID))
+
 }
 
 func (h *Handler) GetIncoming(w http.ResponseWriter, r *http.Request) {
