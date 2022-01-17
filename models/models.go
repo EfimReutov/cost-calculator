@@ -8,26 +8,26 @@ import (
 )
 
 type Category struct {
-	ID   int8
+	ID   int64
 	Name string
 }
 
 type Source struct {
-	ID   int8
+	ID   int64
 	Name string
 	Date time.Time
 }
 
 type Incoming struct {
 	ID       int64           `json:"id"`
-	SourceID int8            `json:"source_id,omitempty"`
+	SourceID int32           `json:"source_id,omitempty"`
 	Amount   decimal.Decimal `json:"amount"`
 	Date     time.Time       `json:"date"`
 }
 
 type Spend struct {
 	ID          int64           `json:"id"`
-	CategoryID  int8            `json:"category_id"`
+	CategoryID  int32           `json:"category_id"`
 	Amount      decimal.Decimal `json:"amount"`
 	Description string          `json:"description"`
 	Date        time.Time       `json:"date"`
