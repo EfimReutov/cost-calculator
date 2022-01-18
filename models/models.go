@@ -7,17 +7,20 @@ import (
 	"unicode"
 )
 
+// Category represents model for 'categories' table.
 type Category struct {
 	ID   int64
 	Name string
 }
 
+// Source represents model for 'sources' table.
 type Source struct {
 	ID   int64
 	Name string
 	Date time.Time
 }
 
+// Incoming represents model for 'incoming' table.
 type Incoming struct {
 	ID       int64           `json:"id"`
 	SourceID int32           `json:"source_id,omitempty"`
@@ -25,6 +28,7 @@ type Incoming struct {
 	Date     time.Time       `json:"date"`
 }
 
+// Spend represents model for 'spends' table.
 type Spend struct {
 	ID          int64           `json:"id"`
 	CategoryID  int32           `json:"category_id"`

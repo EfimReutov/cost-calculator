@@ -3,6 +3,7 @@ package store
 import "C"
 import "cost-calculator/models"
 
+// Store describes all the methods required by the server to work with the DB.
 type Store interface {
 	InsertCategory(category *models.Category) error
 	GetCategory(id int64) (*models.Category, error)
