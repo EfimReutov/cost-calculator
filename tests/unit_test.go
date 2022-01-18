@@ -17,7 +17,7 @@ func TestCategory_Validation(t *testing.T) {
 		{
 			name: "all good",
 			category: models.Category{
-				Name: "test",
+				Name: "base_service",
 			},
 		},
 		{
@@ -55,7 +55,7 @@ func TestSources_Validation(t *testing.T) {
 		{
 			name: "all good",
 			source: models.Source{
-				Name: "test",
+				Name: "base_service",
 			},
 		},
 		{

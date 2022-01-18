@@ -4,6 +4,10 @@ NAME=costCalculator
 run:
 	./scripts/run.sh
 
+## Generate proto
+genproto:
+	./scripts/generate-proto.sh
+
 ## DockerRun
 docker-up:
 	CGO_ENABLED=0 go build -o main ./cmd

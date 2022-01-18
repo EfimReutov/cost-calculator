@@ -9,6 +9,9 @@ import (
 const (
 	EnvMain Env = "main"
 	EnvDev  Env = "dev"
+
+	ServerTypeREST = "REST"
+	ServerTypeGRPC = "GRPC"
 )
 
 type Env string
@@ -17,12 +20,17 @@ type Configuration struct {
 	Env              Env
 	ServiceHost      string
 	ServicePort      int
+	ServerType       string
 	PostgresDB       string
 	PostgresUser     string
 	PostgresPassword string
 	PostgresHost     string
 	PostgresPort     int
 	PostgresSSLMode  string
+	SMTPServer       string
+	SMTPPort         int
+	MailUser         string
+	MailPassword     string
 }
 
 func LoadCfg() (*Configuration, error) {
@@ -41,6 +49,10 @@ func LoadCfg() (*Configuration, error) {
 	servicePortInt, err := strconv.Atoi(servicePort)
 	if err != nil {
 		return nil, err
+	}
+	serverType := os.Getenv("SERVER_TYPE")
+	if serverType == "" {
+		return nil, errors.New("SERVER_TYPE is empty")
 	}
 	postgresDB := os.Getenv("POSTGRES_DB")
 	if postgresDB == "" {
@@ -70,15 +82,40 @@ func LoadCfg() (*Configuration, error) {
 	if postgresSSLMode == "" {
 		return nil, errors.New("POSTGRES_SSL_MODE is empty")
 	}
+	smtpServer := os.Getenv("SMTP_SERVER")
+	if smtpServer == "" {
+		return nil, errors.New("SMTP_SERVER is empty")
+	}
+	smtpPort := os.Getenv("SMTP_PORT")
+	smtpPortInt, err := strconv.Atoi(smtpPort)
+	if err != nil {
+		return nil, err
+	}
+	if smtpPort == "" {
+		return nil, errors.New("SMTP_PORT is empty")
+	}
+	mailUser := os.Getenv("MAIL_USER")
+	if mailUser == "" {
+		return nil, errors.New("MAIL_USER is empty")
+	}
+	mailPassword := os.Getenv("MAIL_PASSWORD")
+	if mailPassword == "" {
+		return nil, errors.New("MAIL_PASSWORD is empty")
+	}
 	return &Configuration{
 		Env:              Env(env),
 		ServiceHost:      serviceHost,
 		ServicePort:      servicePortInt,
+		ServerType:       serverType,
 		PostgresDB:       postgresDB,
 		PostgresUser:     postgresUser,
 		PostgresPassword: postgresPassword,
 		PostgresHost:     postgresHost,
 		PostgresPort:     postgresPortInt,
 		PostgresSSLMode:  postgresSSLMode,
+		SMTPServer:       smtpServer,
+		SMTPPort:         smtpPortInt,
+		MailUser:         mailUser,
+		MailPassword:     mailPassword,
 	}, nil
 }

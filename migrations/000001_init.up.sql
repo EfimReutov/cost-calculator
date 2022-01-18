@@ -15,7 +15,6 @@ VALUES ('clothes');
 INSERT INTO categories (name)
 VALUES ('other');
 
-
 CREATE TABLE IF NOT EXISTS spends
 (
     id          BIGSERIAL PRIMARY KEY,
@@ -42,5 +41,4 @@ CREATE TABLE IF NOT EXISTS incoming
     source_id SMALLINT  NOT NULL REFERENCES sources (id),
     amount    DECIMAL   NOT NULL,
     date TIMESTAMP NOT NULL DEFAULT (now())
-
 );
