@@ -14,8 +14,10 @@ const (
 	ServerTypeGRPC = "GRPC"
 )
 
+// Env represents current environment.
 type Env string
 
+// Configuration represents all required configurations.
 type Configuration struct {
 	Env              Env
 	ServiceHost      string
@@ -33,6 +35,7 @@ type Configuration struct {
 	MailPassword     string
 }
 
+// LoadCfg read environments and return *Configuration.
 func LoadCfg() (*Configuration, error) {
 	env := os.Getenv("ENV")
 	if env == "" {

@@ -12,6 +12,7 @@ type Postgres struct {
 	db *sql.DB
 }
 
+// NewDB creates a connection to the postgres db.
 func NewDB(cfg *config.Configuration) (*Postgres, error) {
 	db, err := sql.Open("postgres", newConfig(cfg).connStr())
 	if err != nil {
@@ -25,6 +26,7 @@ func NewDB(cfg *config.Configuration) (*Postgres, error) {
 	return &Postgres{db: db}, nil
 }
 
+// Close closes the database and prevents new queries from starting.
 func (p *Postgres) Close() {
 	p.db.Close()
 }

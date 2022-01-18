@@ -11,12 +11,14 @@ type Handler struct {
 	store store.Store
 }
 
+// NewHandler returns *Handler
 func NewHandler(store store.Store) (*Handler, error) {
 	return &Handler{
 		store: store,
 	}, nil
 }
 
+// Run runs the server.
 func Run(store store.Store, address string) error {
 	h, err := NewHandler(store)
 	if err != nil {

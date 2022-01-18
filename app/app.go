@@ -9,6 +9,7 @@ import (
 	"fmt"
 )
 
+// Run function configures and starts a postgres connection depending on the type of server
 func Run() error {
 	cfg, err := config.LoadCfg()
 	if err != nil {
