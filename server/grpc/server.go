@@ -13,12 +13,14 @@ type server struct {
 	base_service.UnimplementedTestServiceServer
 }
 
+// NewServer returns *server
 func NewServer(store store.Store) *server {
 	return &server{
 		store: store,
 	}
 }
 
+// Run runs the server.
 func Run(store store.Store, address string) error {
 	s := grpc.NewServer()
 	srv := NewServer(store)
