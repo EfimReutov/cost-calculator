@@ -29,10 +29,6 @@ type Configuration struct {
 	PostgresHost     string
 	PostgresPort     int
 	PostgresSSLMode  string
-	SMTPServer       string
-	SMTPPort         int
-	MailUser         string
-	MailPassword     string
 }
 
 // LoadCfg read environments and return *Configuration.
@@ -85,26 +81,6 @@ func LoadCfg() (*Configuration, error) {
 	if postgresSSLMode == "" {
 		return nil, errors.New("the required $POSTGRES_SSL_MODE environment variable is missing")
 	}
-	smtpServer := os.Getenv("SMTP_SERVER")
-	if smtpServer == "" {
-		return nil, errors.New("the required $SMTP_SERVER environment variable is missing")
-	}
-	smtpPort := os.Getenv("SMTP_PORT")
-	smtpPortInt, err := strconv.Atoi(smtpPort)
-	if err != nil {
-		return nil, err
-	}
-	if smtpPort == "" {
-		return nil, errors.New("the required $SMTP_PORT environment variable is missing")
-	}
-	mailUser := os.Getenv("MAIL_USER")
-	if mailUser == "" {
-		return nil, errors.New("the required $MAIL_USER environment variable is missing")
-	}
-	mailPassword := os.Getenv("MAIL_PASSWORD")
-	if mailPassword == "" {
-		return nil, errors.New("the required $MAIL_PASSWORD environment variable is missing")
-	}
 	return &Configuration{
 		Env:              Env(env),
 		ServiceHost:      serviceHost,
@@ -116,9 +92,5 @@ func LoadCfg() (*Configuration, error) {
 		PostgresHost:     postgresHost,
 		PostgresPort:     postgresPortInt,
 		PostgresSSLMode:  postgresSSLMode,
-		SMTPServer:       smtpServer,
-		SMTPPort:         smtpPortInt,
-		MailUser:         mailUser,
-		MailPassword:     mailPassword,
 	}, nil
 }
