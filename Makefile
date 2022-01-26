@@ -2,13 +2,17 @@ NAME=costCalculator
 
 ## Running current project in the terminal.
 run:
-	go run cmd/main.go
+	./scripts/run.sh
+
+## Generate proto
+genproto:
+	./scripts/generate-proto.sh
 
 ## DockerRun
-docker-run:
+docker-up:
 	CGO_ENABLED=0 go build -o main ./cmd
-	docker build -t costcalculatorimage -f ./Dockerfile .
-	docker run -d --network host --name costcalculator costcalculatorimage
+	docker-compose -f docker-compose.yaml up -d
+	rm -rf ./main
 
 ## Build
 build:
@@ -24,7 +28,7 @@ format:
 ##------------------------------------------------ DB migration commands -----------------------------------------------
 
 ## "postgres://user:password@host:port/name_db?sslmode=disable"
-database=postgres://efim:25121997@localhost:6543/postgres?sslmode=disable
+database=postgres://testUser:testPassword@localhost:6543/postgres?sslmode=disable
 
 ## Creates migrations files with name wich should be specified with flag 'n=some_name'
 create-migrations:
