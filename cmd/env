@@ -1,7 +1,7 @@
 export ENV=dev
 export SERVICE_HOST=0.0.0.0
 export SERVICE_PORT=8084
-export SERVER_TYPE=GRPC
+export SERVER_TYPE=REST
 export POSTGRES_DB=postgres
 export POSTGRES_USER=testUser
 export POSTGRES_PASSWORD=testPassword

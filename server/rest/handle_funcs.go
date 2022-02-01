@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -174,28 +175,49 @@ func (h *Handler) DeleteSource(w http.ResponseWriter, r *http.Request) {
 	response(w, http.StatusOK, fmt.Sprintf("successful deleted, id: %d", source.ID))
 }
 
-func (h *Handler) InsertIncoming(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) InsertIncome(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		response(w, http.StatusBadRequest, "invalid method")
 		return
 	}
-	incoming := new(models.Incoming)
-	err := json.NewDecoder(r.Body).Decode(incoming)
+	income := new(models.Income)
+	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
 		response(w, http.StatusBadRequest, err)
 		return
 	}
 
-	incoming.Date = time.Now().Local()
+	income.Date = time.Now().Local()
 
-	err = h.store.InsertIncoming(incoming)
+	err = h.store.InsertIncome(income)
 	if err != nil {
 		response(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	response(w, http.StatusOK, fmt.Sprintf("successful inserted, id: %d", incoming.ID))
+	response(w, http.StatusOK, fmt.Sprintf("successful inserted, id: %d", income.ID))
 
+}
+
+func (h *Handler) GetIncome(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		response(w, http.StatusBadRequest, "invalid method")
+		return
+	}
+	income := new(models.Income)
+	err := json.NewDecoder(r.Body).Decode(income)
+	if err != nil {
+		response(w, http.StatusBadRequest, err)
+		return
+	}
+
+	income, err = h.store.GetIncome(income.ID)
+	if err != nil {
+		response(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	response(w, http.StatusOK, income)
 }
 
 func (h *Handler) GetIncoming(w http.ResponseWriter, r *http.Request) {
@@ -203,14 +225,27 @@ func (h *Handler) GetIncoming(w http.ResponseWriter, r *http.Request) {
 		response(w, http.StatusBadRequest, "invalid method")
 		return
 	}
-	incoming := new(models.Incoming)
-	err := json.NewDecoder(r.Body).Decode(incoming)
-	if err != nil {
-		response(w, http.StatusBadRequest, err)
+	q := r.URL.Query()
+	page := q.Get("page")
+	if page == "" {
+		return
+	}
+	pageInt, err := strconv.Atoi(page)
+	if err != nil || pageInt == 0 {
+		response(w, http.StatusBadRequest, "invalid parameter page")
+		return
+	}
+	limit := q.Get("limit")
+	if page == "" {
+		return
+	}
+	limitInt, err := strconv.Atoi(limit)
+	if err != nil || limitInt == 0 {
+		response(w, http.StatusBadRequest, "invalid parameter limit")
 		return
 	}
 
-	incoming, err = h.store.GetIncoming(incoming.ID)
+	incoming, err := h.store.GetIncoming(pageInt, limitInt)
 	if err != nil {
 		response(w, http.StatusInternalServerError, err.Error())
 		return
@@ -219,46 +254,46 @@ func (h *Handler) GetIncoming(w http.ResponseWriter, r *http.Request) {
 	response(w, http.StatusOK, incoming)
 }
 
-func (h *Handler) UpdateIncoming(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) UpdateIncome(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		response(w, http.StatusBadRequest, "invalid method")
 		return
 	}
-	incoming := new(models.Incoming)
-	err := json.NewDecoder(r.Body).Decode(incoming)
+	income := new(models.Income)
+	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
 		response(w, http.StatusBadRequest, err)
 		return
 	}
 
-	err = h.store.UpdateIncoming(incoming)
+	err = h.store.UpdateIncome(income)
 	if err != nil {
 		response(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	response(w, http.StatusOK, fmt.Sprintf("successful updated, id: %d", incoming.ID))
+	response(w, http.StatusOK, fmt.Sprintf("successful updated, id: %d", income.ID))
 }
 
-func (h *Handler) DeleteIncoming(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) DeleteIncome(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
 		response(w, http.StatusBadRequest, "invalid method")
 		return
 	}
-	incoming := new(models.Incoming)
-	err := json.NewDecoder(r.Body).Decode(incoming)
+	income := new(models.Income)
+	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
 		response(w, http.StatusBadRequest, err)
 		return
 	}
 
-	err = h.store.DeleteIncoming(incoming.ID)
+	err = h.store.DeleteIncome(income.ID)
 	if err != nil {
 		response(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	response(w, http.StatusOK, fmt.Sprintf("successful deleted, id: %d", incoming.ID))
+	response(w, http.StatusOK, fmt.Sprintf("successful deleted, id: %d", income.ID))
 }
 
 func (h *Handler) InsertSpend(w http.ResponseWriter, r *http.Request) {
@@ -301,6 +336,40 @@ func (h *Handler) GetSpend(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response(w, http.StatusOK, spend)
+}
+
+func (h *Handler) GetSpends(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		response(w, http.StatusBadRequest, "invalid method")
+		return
+	}
+	q := r.URL.Query()
+	page := q.Get("page")
+	if page == "" {
+		return
+	}
+	pageInt, err := strconv.Atoi(page)
+	if err != nil || pageInt == 0 {
+		response(w, http.StatusBadRequest, "invalid parameter page")
+		return
+	}
+	limit := q.Get("limit")
+	if page == "" {
+		return
+	}
+	limitInt, err := strconv.Atoi(limit)
+	if err != nil || limitInt == 0 {
+		response(w, http.StatusBadRequest, "invalid parameter limit")
+		return
+	}
+
+	spends, err := h.store.GetSpends(pageInt, limitInt)
+	if err != nil {
+		response(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	response(w, http.StatusOK, spends)
 }
 
 func (h *Handler) UpdateSpend(w http.ResponseWriter, r *http.Request) {

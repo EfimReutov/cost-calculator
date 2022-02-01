@@ -20,8 +20,8 @@ type Source struct {
 	Date time.Time
 }
 
-// Incoming represents model for 'incoming' table.
-type Incoming struct {
+// Income represents model for 'incoming' table.
+type Income struct {
 	ID       int64           `json:"id"`
 	SourceID int32           `json:"source_id,omitempty"`
 	Amount   decimal.Decimal `json:"amount"`
@@ -35,6 +35,11 @@ type Spend struct {
 	Amount      decimal.Decimal `json:"amount"`
 	Description string          `json:"description"`
 	Date        time.Time       `json:"date"`
+}
+
+type Pagination struct {
+	Page  int `json:"page"`
+	Limit int `json:"limit"`
 }
 
 func (c *Category) Validation() error {
@@ -56,7 +61,7 @@ func (s *Source) Validation() error {
 	return nil
 }
 
-func (i *Incoming) Validation() error {
+func (i *Income) Validation() error {
 	if i.SourceID == 0 {
 		return errors.New("source id cannot be zero")
 	}
