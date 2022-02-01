@@ -109,12 +109,12 @@ func (s *server) DeleteSource(ctx context.Context, req *base_service.Request_Del
 	}, nil
 }
 
-func (s *server) InsertIncoming(ctx context.Context, req *base_service.Request_InsertIncoming) (*base_service.Response_InsertIncoming, error) {
+func (s *server) InsertIncome(ctx context.Context, req *base_service.Request_InsertIncome) (*base_service.Response_InsertIncome, error) {
 	amount, err := decimal.NewFromString(req.Incoming.Amount)
 	if err != nil {
 		return nil, err
 	}
-	err = s.store.InsertIncoming(&models.Incoming{
+	err = s.store.InsertIncome(&models.Income{
 		SourceID: req.Incoming.SourceId,
 		Amount:   amount,
 		Date:     req.Incoming.Date.AsTime(),
@@ -122,15 +122,15 @@ func (s *server) InsertIncoming(ctx context.Context, req *base_service.Request_I
 	if err != nil {
 		return nil, err
 	}
-	return &base_service.Response_InsertIncoming{Message: "successful inserted incoming mutepacka"}, nil
+	return &base_service.Response_InsertIncome{Message: "successful inserted incoming mutepacka"}, nil
 }
 
-func (s *server) GetIncoming(ctx context.Context, req *base_service.Request_GetIncoming) (*base_service.Response_GetIncoming, error) {
-	incoming, err := s.store.GetIncoming(req.GetId())
+func (s *server) GetIncome(ctx context.Context, req *base_service.Request_GetIncome) (*base_service.Response_GetIncome, error) {
+	incoming, err := s.store.GetIncome(req.GetId())
 	if err != nil {
 		return nil, err
 	}
-	return &base_service.Response_GetIncoming{
+	return &base_service.Response_GetIncome{
 		Message: "this is work motherfucka",
 		Incoming: &base_service.Incoming{
 			Id:       incoming.ID,
@@ -141,8 +141,8 @@ func (s *server) GetIncoming(ctx context.Context, req *base_service.Request_GetI
 	}, nil
 }
 
-func (s *server) UpdateIncoming(ctx context.Context, req *base_service.Request_UpdateIncoming) (*base_service.Response_UpdateIncoming, error) {
-	err := s.store.UpdateIncoming(&models.Incoming{
+func (s *server) UpdateIncome(ctx context.Context, req *base_service.Request_UpdateIncome) (*base_service.Response_UpdateIncome, error) {
+	err := s.store.UpdateIncome(&models.Income{
 		ID:       req.Incoming.Id,
 		SourceID: req.Incoming.SourceId,
 		//Amount:   req.Amount,
@@ -150,18 +150,18 @@ func (s *server) UpdateIncoming(ctx context.Context, req *base_service.Request_U
 	if err != nil {
 		return nil, err
 	}
-	return &base_service.Response_UpdateIncoming{
+	return &base_service.Response_UpdateIncome{
 		Message: "this is work motherfucka",
 		Id:      req.Incoming.Id,
 	}, nil
 }
 
-func (s *server) DeleteIncoming(ctx context.Context, req *base_service.Request_DeleteIncoming) (*base_service.Response_DeleteIncoming, error) {
-	err := s.store.DeleteIncoming(req.Id)
+func (s *server) DeleteIncome(ctx context.Context, req *base_service.Request_DeleteIncome) (*base_service.Response_DeleteIncome, error) {
+	err := s.store.DeleteIncome(req.Id)
 	if err != nil {
 		return nil, err
 	}
-	return &base_service.Response_DeleteIncoming{
+	return &base_service.Response_DeleteIncome{
 		Message: "udaleno normas",
 		Id:      req.Id,
 	}, nil

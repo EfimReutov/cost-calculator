@@ -80,33 +80,33 @@ func TestSources_Validation(t *testing.T) {
 func TestIncoming_Validation(t *testing.T) {
 	tests := []struct {
 		name     string
-		incoming models.Incoming
+		incoming models.Income
 		err      error
 	}{
 		{
 			name: "all good",
-			incoming: models.Incoming{
+			incoming: models.Income{
 				SourceID: 1,
 				Amount:   decimal.New(2, 2),
 			},
 		},
 		{
 			name: "source id is zero",
-			incoming: models.Incoming{
+			incoming: models.Income{
 				Amount: decimal.New(2, 0),
 			},
 			err: errors.New("source id cannot be zero"),
 		},
 		{
 			name: "amount is zero",
-			incoming: models.Incoming{
+			incoming: models.Income{
 				SourceID: 2,
 			},
 			err: errors.New("amount cannot be equal or less than zero"),
 		},
 		{
 			name: "amount is negative",
-			incoming: models.Incoming{
+			incoming: models.Income{
 				SourceID: 2,
 				Amount:   decimal.New(-2, -2),
 			},
