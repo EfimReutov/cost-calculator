@@ -10,10 +10,6 @@ import (
 )
 
 func (h *Handler) InsertCategory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPut {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	category := new(models.Category)
 	err := json.NewDecoder(r.Body).Decode(category)
 	if err != nil {
@@ -31,10 +27,6 @@ func (h *Handler) InsertCategory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetCategory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	category := new(models.Category)
 	err := json.NewDecoder(r.Body).Decode(category)
 	if err != nil {
@@ -52,10 +44,6 @@ func (h *Handler) GetCategory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UpdateCategory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	category := new(models.Category)
 	err := json.NewDecoder(r.Body).Decode(category)
 	if err != nil {
@@ -72,10 +60,6 @@ func (h *Handler) UpdateCategory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeleteCategory(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	category := new(models.Category)
 	err := json.NewDecoder(r.Body).Decode(category)
 	if err != nil {
@@ -93,10 +77,6 @@ func (h *Handler) DeleteCategory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) InsertSource(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPut {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	source := new(models.Source)
 	err := json.NewDecoder(r.Body).Decode(source)
 	if err != nil {
@@ -114,10 +94,6 @@ func (h *Handler) InsertSource(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetSource(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	source := new(models.Source)
 	err := json.NewDecoder(r.Body).Decode(source)
 	if err != nil {
@@ -135,10 +111,6 @@ func (h *Handler) GetSource(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UpdateSource(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	source := new(models.Source)
 	err := json.NewDecoder(r.Body).Decode(source)
 	if err != nil {
@@ -155,10 +127,6 @@ func (h *Handler) UpdateSource(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeleteSource(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	source := new(models.Source)
 	err := json.NewDecoder(r.Body).Decode(source)
 	if err != nil {
@@ -176,10 +144,6 @@ func (h *Handler) DeleteSource(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) InsertIncome(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPut {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	income := new(models.Income)
 	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
@@ -200,10 +164,6 @@ func (h *Handler) InsertIncome(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetIncome(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	income := new(models.Income)
 	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
@@ -276,10 +236,6 @@ func (h *Handler) UpdateIncome(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeleteIncome(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	income := new(models.Income)
 	err := json.NewDecoder(r.Body).Decode(income)
 	if err != nil {
@@ -297,10 +253,6 @@ func (h *Handler) DeleteIncome(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) InsertSpend(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPut {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	spend := new(models.Spend)
 	err := json.NewDecoder(r.Body).Decode(spend)
 	if err != nil {
@@ -318,10 +270,6 @@ func (h *Handler) InsertSpend(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetSpend(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	spend := new(models.Spend)
 	err := json.NewDecoder(r.Body).Decode(spend)
 	if err != nil {
@@ -339,10 +287,6 @@ func (h *Handler) GetSpend(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetSpends(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	q := r.URL.Query()
 	page := q.Get("page")
 	if page == "" {
@@ -373,10 +317,6 @@ func (h *Handler) GetSpends(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UpdateSpend(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	spend := new(models.Spend)
 	err := json.NewDecoder(r.Body).Decode(spend)
 	if err != nil {
@@ -393,10 +333,6 @@ func (h *Handler) UpdateSpend(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeleteSpend(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		response(w, http.StatusBadRequest, "invalid method")
-		return
-	}
 	spend := new(models.Spend)
 	err := json.NewDecoder(r.Body).Decode(spend)
 	if err != nil {
