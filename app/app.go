@@ -25,7 +25,7 @@ func Run() error {
 	if cfg.ServerType == config.ServerTypeGRPC {
 		return grpc.Run(pg, fmt.Sprintf(":%d", cfg.ServicePort))
 	} else if cfg.ServerType == config.ServerTypeREST {
-		return rest.Run(pg, fmt.Sprintf("%s:%d", cfg.ServiceHost, cfg.ServicePort))
+		return rest.Run(pg, cfg)
 	} else {
 		return errors.New(fmt.Sprintf("invalid server type: %s", cfg.ServerType))
 	}

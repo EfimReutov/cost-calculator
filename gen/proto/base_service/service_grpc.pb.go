@@ -26,10 +26,10 @@ type TestServiceClient interface {
 	GetSource(ctx context.Context, in *Request_GetSource, opts ...grpc.CallOption) (*Response_GetSource, error)
 	UpdateSource(ctx context.Context, in *Request_UpdateSource, opts ...grpc.CallOption) (*Response_UpdateSource, error)
 	DeleteSource(ctx context.Context, in *Request_DeleteSource, opts ...grpc.CallOption) (*Response_DeleteSource, error)
-	InsertIncoming(ctx context.Context, in *Request_InsertIncoming, opts ...grpc.CallOption) (*Response_InsertIncoming, error)
-	GetIncoming(ctx context.Context, in *Request_GetIncoming, opts ...grpc.CallOption) (*Response_GetIncoming, error)
-	UpdateIncoming(ctx context.Context, in *Request_UpdateIncoming, opts ...grpc.CallOption) (*Response_UpdateIncoming, error)
-	DeleteIncoming(ctx context.Context, in *Request_DeleteIncoming, opts ...grpc.CallOption) (*Response_DeleteIncoming, error)
+	InsertIncome(ctx context.Context, in *Request_InsertIncome, opts ...grpc.CallOption) (*Response_InsertIncome, error)
+	GetIncome(ctx context.Context, in *Request_GetIncome, opts ...grpc.CallOption) (*Response_GetIncome, error)
+	UpdateIncome(ctx context.Context, in *Request_UpdateIncome, opts ...grpc.CallOption) (*Response_UpdateIncome, error)
+	DeleteIncome(ctx context.Context, in *Request_DeleteIncome, opts ...grpc.CallOption) (*Response_DeleteIncome, error)
 	InsertSpend(ctx context.Context, in *Request_InsertSpend, opts ...grpc.CallOption) (*Response_InsertSpend, error)
 	GetSpend(ctx context.Context, in *Request_GetSpend, opts ...grpc.CallOption) (*Response_GetSpend, error)
 	UpdateSpend(ctx context.Context, in *Request_UpdateSpend, opts ...grpc.CallOption) (*Response_UpdateSpend, error)
@@ -116,36 +116,36 @@ func (c *testServiceClient) DeleteSource(ctx context.Context, in *Request_Delete
 	return out, nil
 }
 
-func (c *testServiceClient) InsertIncoming(ctx context.Context, in *Request_InsertIncoming, opts ...grpc.CallOption) (*Response_InsertIncoming, error) {
-	out := new(Response_InsertIncoming)
-	err := c.cc.Invoke(ctx, "/base_service.TestService/InsertIncoming", in, out, opts...)
+func (c *testServiceClient) InsertIncome(ctx context.Context, in *Request_InsertIncome, opts ...grpc.CallOption) (*Response_InsertIncome, error) {
+	out := new(Response_InsertIncome)
+	err := c.cc.Invoke(ctx, "/base_service.TestService/InsertIncome", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *testServiceClient) GetIncoming(ctx context.Context, in *Request_GetIncoming, opts ...grpc.CallOption) (*Response_GetIncoming, error) {
-	out := new(Response_GetIncoming)
-	err := c.cc.Invoke(ctx, "/base_service.TestService/GetIncoming", in, out, opts...)
+func (c *testServiceClient) GetIncome(ctx context.Context, in *Request_GetIncome, opts ...grpc.CallOption) (*Response_GetIncome, error) {
+	out := new(Response_GetIncome)
+	err := c.cc.Invoke(ctx, "/base_service.TestService/GetIncome", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *testServiceClient) UpdateIncoming(ctx context.Context, in *Request_UpdateIncoming, opts ...grpc.CallOption) (*Response_UpdateIncoming, error) {
-	out := new(Response_UpdateIncoming)
-	err := c.cc.Invoke(ctx, "/base_service.TestService/UpdateIncoming", in, out, opts...)
+func (c *testServiceClient) UpdateIncome(ctx context.Context, in *Request_UpdateIncome, opts ...grpc.CallOption) (*Response_UpdateIncome, error) {
+	out := new(Response_UpdateIncome)
+	err := c.cc.Invoke(ctx, "/base_service.TestService/UpdateIncome", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *testServiceClient) DeleteIncoming(ctx context.Context, in *Request_DeleteIncoming, opts ...grpc.CallOption) (*Response_DeleteIncoming, error) {
-	out := new(Response_DeleteIncoming)
-	err := c.cc.Invoke(ctx, "/base_service.TestService/DeleteIncoming", in, out, opts...)
+func (c *testServiceClient) DeleteIncome(ctx context.Context, in *Request_DeleteIncome, opts ...grpc.CallOption) (*Response_DeleteIncome, error) {
+	out := new(Response_DeleteIncome)
+	err := c.cc.Invoke(ctx, "/base_service.TestService/DeleteIncome", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -200,10 +200,10 @@ type TestServiceServer interface {
 	GetSource(context.Context, *Request_GetSource) (*Response_GetSource, error)
 	UpdateSource(context.Context, *Request_UpdateSource) (*Response_UpdateSource, error)
 	DeleteSource(context.Context, *Request_DeleteSource) (*Response_DeleteSource, error)
-	InsertIncoming(context.Context, *Request_InsertIncoming) (*Response_InsertIncoming, error)
-	GetIncoming(context.Context, *Request_GetIncoming) (*Response_GetIncoming, error)
-	UpdateIncoming(context.Context, *Request_UpdateIncoming) (*Response_UpdateIncoming, error)
-	DeleteIncoming(context.Context, *Request_DeleteIncoming) (*Response_DeleteIncoming, error)
+	InsertIncome(context.Context, *Request_InsertIncome) (*Response_InsertIncome, error)
+	GetIncome(context.Context, *Request_GetIncome) (*Response_GetIncome, error)
+	UpdateIncome(context.Context, *Request_UpdateIncome) (*Response_UpdateIncome, error)
+	DeleteIncome(context.Context, *Request_DeleteIncome) (*Response_DeleteIncome, error)
 	InsertSpend(context.Context, *Request_InsertSpend) (*Response_InsertSpend, error)
 	GetSpend(context.Context, *Request_GetSpend) (*Response_GetSpend, error)
 	UpdateSpend(context.Context, *Request_UpdateSpend) (*Response_UpdateSpend, error)
@@ -239,17 +239,17 @@ func (UnimplementedTestServiceServer) UpdateSource(context.Context, *Request_Upd
 func (UnimplementedTestServiceServer) DeleteSource(context.Context, *Request_DeleteSource) (*Response_DeleteSource, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSource not implemented")
 }
-func (UnimplementedTestServiceServer) InsertIncoming(context.Context, *Request_InsertIncoming) (*Response_InsertIncoming, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InsertIncoming not implemented")
+func (UnimplementedTestServiceServer) InsertIncome(context.Context, *Request_InsertIncome) (*Response_InsertIncome, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertIncome not implemented")
 }
-func (UnimplementedTestServiceServer) GetIncoming(context.Context, *Request_GetIncoming) (*Response_GetIncoming, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIncoming not implemented")
+func (UnimplementedTestServiceServer) GetIncome(context.Context, *Request_GetIncome) (*Response_GetIncome, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIncome not implemented")
 }
-func (UnimplementedTestServiceServer) UpdateIncoming(context.Context, *Request_UpdateIncoming) (*Response_UpdateIncoming, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateIncoming not implemented")
+func (UnimplementedTestServiceServer) UpdateIncome(context.Context, *Request_UpdateIncome) (*Response_UpdateIncome, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateIncome not implemented")
 }
-func (UnimplementedTestServiceServer) DeleteIncoming(context.Context, *Request_DeleteIncoming) (*Response_DeleteIncoming, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteIncoming not implemented")
+func (UnimplementedTestServiceServer) DeleteIncome(context.Context, *Request_DeleteIncome) (*Response_DeleteIncome, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteIncome not implemented")
 }
 func (UnimplementedTestServiceServer) InsertSpend(context.Context, *Request_InsertSpend) (*Response_InsertSpend, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertSpend not implemented")
@@ -420,74 +420,74 @@ func _TestService_DeleteSource_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TestService_InsertIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request_InsertIncoming)
+func _TestService_InsertIncome_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request_InsertIncome)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TestServiceServer).InsertIncoming(ctx, in)
+		return srv.(TestServiceServer).InsertIncome(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/base_service.TestService/InsertIncoming",
+		FullMethod: "/base_service.TestService/InsertIncome",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).InsertIncoming(ctx, req.(*Request_InsertIncoming))
+		return srv.(TestServiceServer).InsertIncome(ctx, req.(*Request_InsertIncome))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TestService_GetIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request_GetIncoming)
+func _TestService_GetIncome_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request_GetIncome)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TestServiceServer).GetIncoming(ctx, in)
+		return srv.(TestServiceServer).GetIncome(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/base_service.TestService/GetIncoming",
+		FullMethod: "/base_service.TestService/GetIncome",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).GetIncoming(ctx, req.(*Request_GetIncoming))
+		return srv.(TestServiceServer).GetIncome(ctx, req.(*Request_GetIncome))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TestService_UpdateIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request_UpdateIncoming)
+func _TestService_UpdateIncome_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request_UpdateIncome)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TestServiceServer).UpdateIncoming(ctx, in)
+		return srv.(TestServiceServer).UpdateIncome(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/base_service.TestService/UpdateIncoming",
+		FullMethod: "/base_service.TestService/UpdateIncome",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).UpdateIncoming(ctx, req.(*Request_UpdateIncoming))
+		return srv.(TestServiceServer).UpdateIncome(ctx, req.(*Request_UpdateIncome))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TestService_DeleteIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request_DeleteIncoming)
+func _TestService_DeleteIncome_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request_DeleteIncome)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TestServiceServer).DeleteIncoming(ctx, in)
+		return srv.(TestServiceServer).DeleteIncome(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/base_service.TestService/DeleteIncoming",
+		FullMethod: "/base_service.TestService/DeleteIncome",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).DeleteIncoming(ctx, req.(*Request_DeleteIncoming))
+		return srv.(TestServiceServer).DeleteIncome(ctx, req.(*Request_DeleteIncome))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -604,20 +604,20 @@ var TestService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TestService_DeleteSource_Handler,
 		},
 		{
-			MethodName: "InsertIncoming",
-			Handler:    _TestService_InsertIncoming_Handler,
+			MethodName: "InsertIncome",
+			Handler:    _TestService_InsertIncome_Handler,
 		},
 		{
-			MethodName: "GetIncoming",
-			Handler:    _TestService_GetIncoming_Handler,
+			MethodName: "GetIncome",
+			Handler:    _TestService_GetIncome_Handler,
 		},
 		{
-			MethodName: "UpdateIncoming",
-			Handler:    _TestService_UpdateIncoming_Handler,
+			MethodName: "UpdateIncome",
+			Handler:    _TestService_UpdateIncome_Handler,
 		},
 		{
-			MethodName: "DeleteIncoming",
-			Handler:    _TestService_DeleteIncoming_Handler,
+			MethodName: "DeleteIncome",
+			Handler:    _TestService_DeleteIncome_Handler,
 		},
 		{
 			MethodName: "InsertSpend",

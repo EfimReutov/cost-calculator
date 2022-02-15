@@ -15,10 +15,10 @@ service TestService {
   rpc GetSource (Request.GetSource) returns (Response.GetSource) {}
   rpc UpdateSource (Request.UpdateSource) returns (Response.UpdateSource) {}
   rpc DeleteSource (Request.DeleteSource) returns (Response.DeleteSource) {}
-  rpc InsertIncoming(Request.InsertIncoming) returns (Response.InsertIncoming) {}
-  rpc GetIncoming(Request.GetIncoming) returns (Response.GetIncoming) {}
-  rpc UpdateIncoming(Request.UpdateIncoming) returns (Response.UpdateIncoming) {}
-  rpc DeleteIncoming(Request.DeleteIncoming) returns (Response.DeleteIncoming) {}
+  rpc InsertIncome(Request.InsertIncome) returns (Response.InsertIncome) {}
+  rpc GetIncome(Request.GetIncome) returns (Response.GetIncome) {}
+  rpc UpdateIncome(Request.UpdateIncome) returns (Response.UpdateIncome) {}
+  rpc DeleteIncome(Request.DeleteIncome) returns (Response.DeleteIncome) {}
   rpc InsertSpend(Request.InsertSpend) returns (Response.InsertSpend) {}
   rpc GetSpend(Request.GetSpend) returns (Response.GetSpend) {}
   rpc UpdateSpend(Request.UpdateSpend) returns (Response.UpdateSpend) {}
@@ -58,19 +58,19 @@ message Request {
     int64 id = 1;
   }
 
-  message InsertIncoming {
+  message InsertIncome {
     Incoming incoming = 1;
   }
 
-  message GetIncoming {
+  message GetIncome {
     int64 id = 1;
   }
 
-  message UpdateIncoming {
+  message UpdateIncome {
     Incoming incoming = 1;
   }
 
-  message DeleteIncoming {
+  message DeleteIncome {
     int64 id = 1;
   }
 
@@ -92,22 +92,22 @@ message Request {
 }
 
 message Response {
-  message InsertIncoming {
+  message InsertIncome {
     string message = 1;
     int64 id = 2;
   }
 
-  message GetIncoming {
+  message GetIncome {
     string message = 1;
     Incoming incoming = 2;
   }
 
-  message UpdateIncoming {
+  message UpdateIncome {
     string message = 1;
     int64 id = 2;
   }
 
-  message DeleteIncoming {
+  message DeleteIncome {
     string message = 1;
     int64 id = 2;
   }
