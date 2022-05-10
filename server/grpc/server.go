@@ -9,19 +9,19 @@ import (
 )
 
 type server struct {
-	store store.Store
+	store store.StorePostgres
 	base_service.UnimplementedTestServiceServer
 }
 
 // NewServer returns *server
-func NewServer(store store.Store) *server {
+func NewServer(store store.StorePostgres) *server {
 	return &server{
 		store: store,
 	}
 }
 
 // Run runs the server.
-func Run(store store.Store, address string) error {
+func Run(store store.StorePostgres, address string) error {
 	s := grpc.NewServer()
 	srv := NewServer(store)
 	base_service.RegisterTestServiceServer(s, srv)

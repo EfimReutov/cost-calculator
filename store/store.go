@@ -1,10 +1,9 @@
 package store
 
-import "C"
 import "cost-calculator/models"
 
-// Store describes all the methods required by the server to work with the DB.
-type Store interface {
+// StorePostgres describes all the methods required by the server to work with the DB.
+type StorePostgres interface {
 	InsertCategory(category *models.Category) error
 	GetCategory(id int64) (*models.Category, error)
 	UpdateCategory(category *models.Category) error
@@ -23,4 +22,10 @@ type Store interface {
 	GetSpends(page, limit int) ([]models.Spend, error)
 	UpdateSpend(spend *models.Spend) error
 	DeleteSpend(id int64) error
+}
+
+type StoreRedis interface {
+	InsertOTP()
+	GetOTP()
+	DeleteOTP()
 }
