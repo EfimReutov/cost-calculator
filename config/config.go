@@ -29,6 +29,11 @@ type Configuration struct {
 	PostgresHost     string
 	PostgresPort     int
 	PostgresSSLMode  string
+	RedisDB          int
+	RedisPassword    string
+	RedisHost        string
+	RedisPort        int
+	RedisPoolSize    int
 	SMTPServer       string
 	SMTPPort         int
 	MailUser         string
@@ -85,6 +90,38 @@ func LoadCfg() (*Configuration, error) {
 	if postgresSSLMode == "" {
 		return nil, errors.New("the required $POSTGRES_SSL_MODE environment variable is missing")
 	}
+	redisDB := os.Getenv("REDIS_DB")
+	if redisDB == "" {
+		return nil, errors.New("the required $REDIS_DB environment variable is missing")
+	}
+	redisDBInt, err := strconv.Atoi(redisDB)
+	if err != nil {
+		return nil, err
+	}
+	redisPassword := os.Getenv("REDIS_PASSWORD")
+	if redisPassword == "" {
+		return nil, errors.New("the required $REDIS_PASSWORD environment variable is missing")
+	}
+	redisHost := os.Getenv("REDIS_HOST")
+	if redisHost == "" {
+		return nil, errors.New("the required $REDIS_HOST environment variable is missing")
+	}
+	redisPort := os.Getenv("REDIS_PORT")
+	if redisPort == "" {
+		return nil, errors.New("the required $REDIS_PORT environment variable is missing")
+	}
+	redisPortInt, err := strconv.Atoi(redisPort)
+	if err != nil {
+		return nil, err
+	}
+	redisPoolSize := os.Getenv("REDIS_POOL_SIZE")
+	if redisPoolSize == "" {
+		return nil, errors.New("the required $REDIS_POOL_SIZE environment variable is missing")
+	}
+	redisPoolSizeInt, err := strconv.Atoi(redisPoolSize)
+	if err != nil {
+		return nil, err
+	}
 	smtpServer := os.Getenv("SMTP_SERVER")
 	if smtpServer == "" {
 		return nil, errors.New("the required $SMTP_SERVER environment variable is missing")
@@ -116,6 +153,11 @@ func LoadCfg() (*Configuration, error) {
 		PostgresHost:     postgresHost,
 		PostgresPort:     postgresPortInt,
 		PostgresSSLMode:  postgresSSLMode,
+		RedisDB:          redisDBInt,
+		RedisHost:        redisHost,
+		RedisPort:        redisPortInt,
+		RedisPassword:    redisPassword,
+		RedisPoolSize:    redisPoolSizeInt,
 		SMTPServer:       smtpServer,
 		SMTPPort:         smtpPortInt,
 		MailUser:         mailUser,
